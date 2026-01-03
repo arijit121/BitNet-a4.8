@@ -2,7 +2,7 @@
 # Large files
 *.pth
 *.pt
-TrainDataset.csv
+# TrainDataset.csv
 
 # Python
 __pycache__/

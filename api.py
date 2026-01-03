@@ -47,7 +47,17 @@ logger.info("Model initialized.")
 
 @app.get("/")
 async def health_check():
-    return {"status": "ok", "model": "BitNet-a4.8"}
+    model_status = "training_params_loaded" if os.path.exists(model_path) else "random_weights"
+    return {
+        "status": "ok",
+        "model": "BitNet-a4.8",
+        "model_status": model_status,
+        "config": {
+            "hidden_size": config.hidden_size,
+            "layers": config.num_hidden_layers,
+            "vocab_size": config.vocab_size
+        }
+    }
 
 @app.post("/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest):
